@@ -1,4 +1,8 @@
 # docker-python-flask
+
+Continue on working in this project, source material is : https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+
+
 A simple python  flask app running inside a docker container 
 
 To run:
