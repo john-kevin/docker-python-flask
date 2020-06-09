@@ -14,17 +14,19 @@ pipeline{
 	//   githubPullRequests events: [Open(), commitChanged(), commentPattern('rebuild')], spec: '', triggerMode: 'HEAVY_HOOKS'
 	// }
 
-	stages {
-      stage('Build') {
-      	steps{
+    stages {
+      stage ('Initialization') {
+        steps{
+          script{
+
       		BRANCH_NAME  = env.GIT_BRANCH
 
       		if (BRANCH_NAME == 'origin/master') {
       			echo "Deploy"
       		}
-      	}
+  		  }
+        }
       }
-
 	  // stage('build docker') {
 	  //   steps {
 			// sh """
