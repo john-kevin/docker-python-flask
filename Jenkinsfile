@@ -1,10 +1,19 @@
 pipeline{
-	agent {
-	   	label 'staging'
-	}
-    triggers {
-   		githubPush()
-    }
+
+	// agent {
+	//    	label 'staging'
+	// }
+
+	agent any
+
+    // triggers {
+   	// 	githubPush()
+    // }
+
+ //    triggers {
+	//   githubPullRequests events: [Open(), commitChanged(), commentPattern('rebuild')], spec: '', triggerMode: 'HEAVY_HOOKS'
+	// }
+
 	stages {
 	  stage('build docker') {
 	    steps {
