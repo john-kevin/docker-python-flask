@@ -40,7 +40,7 @@ pipeline{
 		  		}
     		}
 		    when {
-		      branch comparator: 'EQUALS', pattern: 'master master2'
+		      branch comparator: 'EQUALS', pattern:  'master'
 		      beforeAgent true
 		    }
 		}
