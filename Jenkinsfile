@@ -15,18 +15,30 @@ pipeline{
 	// }
 
     stages {
-      stage ('Initialization') {
-        steps{
-          script{
+    	stage ('Build') {
+    		steps{
+    			echo "Building"
+    		}
+    	} 
+    	
+    	stage ('Testing') {
+    		steps{
+    			echo "Testing"
+    		}
+    	} 
 
-      		BRANCH_NAME  = env.GIT_BRANCH
+    	stage ('Deploy') {
+    		steps{
+    			script{
 
-      		if (BRANCH_NAME == 'origin/master') {
-      			echo "Deploy"
-      		}
-  		  }
-        }
-      }
+  					BRANCH_NAME  = env.GIT_BRANCH
+
+  					if (BRANCH_NAME == 'origin/master' || BRANCH_NAME == 'origin/staging') {
+  						echo "Deploy"
+  					}
+		  		}
+    		}
+		}
 	  // stage('build docker') {
 	  //   steps {
 			// sh """
