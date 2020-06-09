@@ -15,12 +15,12 @@ pipeline{
 	// }
 
 	stages {
-      stage('force fail') {
-      	steps {
-      		exit 1
-      	}
+      // stage('force fail') {
+      // 	steps {
+      // 		exit 1
+      // 	}
 
-      }
+      // }
 	  stage('build docker') {
 	    steps {
 			sh """
