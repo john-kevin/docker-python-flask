@@ -15,29 +15,33 @@ pipeline{
 	// }
 
 	stages {
-      // stage('force fail') {
-      // 	steps {
-      // 		exit 1
-      // 	}
+      stage('Build') {
+      	steps{
+      		BRANCH_NAME  = env.GIT_BRANCH
 
-      // }
-	  stage('build docker') {
-	    steps {
-			sh """
-			    docker stop py-api
-			    docker rm py-api
-				bash run.sh
-			"""
-	     // echo "${GIT_COMMIT[0..6]}"
-	     // echo "${GIT_COMMIT}"
-	     // tupan('Tupan JONESd!')
-	    }
+      		if (BRANCH_NAME == 'origin/master') {
+      			echo "Deploy"
+      		}
+      	}
+      }
 
-	    when {
-	      branch comparator: 'EQUALS', pattern: 'master'
-	      beforeAgent true
-	    }
-	  }
+	  // stage('build docker') {
+	  //   steps {
+			// sh """
+			//     docker stop py-api
+			//     docker rm py-api
+			// 	bash run.sh
+			// """
+	  //    echo "${GIT_COMMIT[0..6]}"
+	  //    echo "${GIT_COMMIT}"
+	  //    tupan('Tupan JONESd!')
+	  //   }
+
+	  //   when {
+	  //     branch comparator: 'EQUALS', pattern: 'master'
+	  //     beforeAgent true
+	  //   }
+	  // }
 	}
 }
 
