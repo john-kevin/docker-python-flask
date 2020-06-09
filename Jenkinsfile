@@ -24,6 +24,7 @@ pipeline{
     	stage ('Testing') {
     		steps{
     			echo "Testing"
+    			echo env.GIT_BRANCH
     		}
     	} 
 
@@ -62,5 +63,5 @@ pipeline{
 
                        
 def tupan(message) {
-	sh "echo Hi this is ${message}"	
+	sh "echo Hi this iss ${message}"	
 }
