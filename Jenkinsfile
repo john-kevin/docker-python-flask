@@ -62,5 +62,5 @@ pipeline{
 
                        
 def tupan(message) {
-	sh "echo Hi this is ${message}"	
+	sh "echo Hi this iss ${message}"	
 }
