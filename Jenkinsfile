@@ -31,14 +31,18 @@ pipeline{
     	stage ('Deploy') {
     		steps{
     			script{
+    				echo "Deployable"
+  					// BRANCH_NAME  = env.GIT_BRANCH
 
-  					BRANCH_NAME  = env.GIT_BRANCH
-
-  					if (BRANCH_NAME == 'master' || BRANCH_NAME == 'staging') {
-  						echo "Deploy"
-  					}
+  					// if (BRANCH_NAME == 'master' || BRANCH_NAME == 'staging') {
+  					// 	echo "Deploy"
+  					// }
 		  		}
     		}
+		    when {
+		      branch comparator: 'EQUALS', pattern: 'master'
+		      beforeAgent true
+		    }
 		}
 	  // stage('build docker') {
 	  //   steps {
