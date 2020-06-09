@@ -34,7 +34,7 @@ pipeline{
 
   					BRANCH_NAME  = env.GIT_BRANCH
 
-  					if (BRANCH_NAME == 'origin/master' || BRANCH_NAME == 'origin/staging') {
+  					if (BRANCH_NAME == 'master' || BRANCH_NAME == 'staging') {
   						echo "Deploy"
   					}
 		  		}
