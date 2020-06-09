@@ -24,6 +24,7 @@ pipeline{
     	stage ('Testing') {
     		steps{
     			echo "Testing"
+    			echo env.GIT_BRANCH
     		}
     	} 
 
