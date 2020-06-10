@@ -29,6 +29,11 @@ pipeline{
     	} 
 
     	stage ('Integration Test Testing') {
+	     	when {
+		        expression {
+		          env.BRANCH_NAME ==~ /(PR-*).*/
+		        }
+     		}
     		steps{
     			echo "Integration"
     			echo env.GIT_BRANCH
