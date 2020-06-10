@@ -28,6 +28,13 @@ pipeline{
     		}
     	} 
 
+    	stage ('Integration Test Testing') {
+    		steps{
+    			echo "Integration"
+    			echo env.GIT_BRANCH
+    		}
+    	} 
+
     	stage ('Deploy') {
 	     	when {
 		        expression {
