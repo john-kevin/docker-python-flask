@@ -18,7 +18,7 @@ pipeline{
     	stage ('Checkout') {
     		steps{
     			echo "Building"
-    			exit 1
+    			
     		}
     	} 
     	
