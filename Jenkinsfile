@@ -15,13 +15,13 @@ pipeline{
 	// }
 
     stages {
-    	stage ('Build') {
+    	stage ('Checkout') {
     		steps{
     			echo "Building"
     		}
     	} 
     	
-    	stage ('Testing') {
+    	stage ('Unit Testing') {
     		steps{
     			echo "Testing"
     			echo env.GIT_BRANCH
@@ -29,20 +29,14 @@ pipeline{
     	} 
 
     	stage ('Deploy') {
-    		steps{
-    			script{
-    				echo "Deployable"
-  					// BRANCH_NAME  = env.GIT_BRANCH
-
-  					// if (BRANCH_NAME == 'master' || BRANCH_NAME == 'staging') {
-  					// 	echo "Deploy"
-  					// }
-		  		}
-    		}
-		    when {
-		      branch comparator: 'EQUALS', pattern:  'master'
-		      beforeAgent true
-		    }
+	     	when {
+		        expression {
+		          env.BRANCH_NAME ==~ /(develop|dit|staging).*/
+		        }
+     		}
+     		steps {
+     			echo "Deploying"
+     		}
 		}
 	  // stage('build docker') {
 	  //   steps {
@@ -62,6 +56,11 @@ pipeline{
 	  //   }
 	  // }
 	}
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
 
 
