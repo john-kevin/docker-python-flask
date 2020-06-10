@@ -15,13 +15,13 @@ pipeline{
 	// }
 
     stages {
-    	stage ('Build') {
+    	stage ('Checkout') {
     		steps{
     			echo "Building"
     		}
     	} 
     	
-    	stage ('Testing') {
+    	stage ('Unit Testing') {
     		steps{
     			echo "Testing"
     			echo env.GIT_BRANCH
@@ -56,6 +56,11 @@ pipeline{
 	  //   }
 	  // }
 	}
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
 
 
