@@ -18,6 +18,7 @@ pipeline{
     	stage ('Checkout') {
     		steps{
     			echo "Building"
+    			exit 1
     		}
     	} 
     	
@@ -31,7 +32,7 @@ pipeline{
     	stage ('Integration Test Testing') {
 	     	when {
 		        expression {
-		          env.BRANCH_NAME ==~ /(PR-*).*/
+		          env.BRANCH_NAME ==~ /(PR-*|develop|dit|staging).*/
 		        }
      		}
     		steps{
