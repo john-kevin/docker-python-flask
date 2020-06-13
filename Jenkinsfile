@@ -4,7 +4,12 @@ pipeline{
 	//    	label 'staging'
 	// }
 
-	agent any
+	agent {
+        node{
+            label 'master'
+            customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}" 
+        }
+    }
 
     // triggers {
    	// 	githubPush()
@@ -15,10 +20,10 @@ pipeline{
 	// }
 
     stages {
-    	stage ('Checkout') {
+    	stage ('Checkout & Build') {
     		steps{
-    			echo "Building"
-    			
+                checkout(env.GIT_BRANCH)
+                sh 'bash ./run.sh'
     		}
     	} 
     	
@@ -69,15 +74,35 @@ pipeline{
 	  //   }
 	  // }
 	}
-    post {
-        always {
-            cleanWs()
-        }
-    }
+    // post {
+    //     always {
+    //         cleanWs()
+    //     }
+    // }
 }
 
 
                        
-def tupan(message) {
+def echoerrrr(message) {
 	sh "echo Hi this iss ${message}"	
+}
+
+def checkout(String branch) {
+    echo "Checking out branch ${branch}"
+    checkout([
+        $class: 'GitSCM', 
+        branches: [
+            [
+                name: "${branch}"
+            ]
+        ], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [], 
+        submoduleCfg: [], 
+        userRemoteConfigs: [
+            [
+                credentialsId: 'private-repo', 
+                url: 'git@github.com:john-kevin/docker-python-flask.git']
+            ]
+        ])
 }
