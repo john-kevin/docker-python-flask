@@ -18,22 +18,7 @@ pipeline{
     	stage ('Checkout') {
     		steps{
     			echo "Building"
-    			checkout([
-                    $class: 'GitSCM', 
-                    branches: [
-                        [
-                            name: env.GIT_BRANCH
-                        ]
-                    ], 
-                    doGenerateSubmoduleConfigurations: false, 
-                    extensions: [], 
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [
-                        [
-                            credentialsId: 'private-repo', 
-                            url: 'git@github.com:john-kevin/docker-python-flask.git']
-                        ]
-                    ])
+                checkout(env.GIT_BRANCH)
     		}
     	} 
     	
@@ -93,6 +78,25 @@ pipeline{
 
 
                        
-def tupan(message) {
+def echoerrrr(message) {
 	sh "echo Hi this iss ${message}"	
+}
+
+def checkout(branch) {
+    checkout([
+        $class: 'GitSCM', 
+        branches: [
+            [
+                name: ${branch}
+            ]
+        ], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [], 
+        submoduleCfg: [], 
+        userRemoteConfigs: [
+            [
+                credentialsId: 'private-repo', 
+                url: 'git@github.com:john-kevin/docker-python-flask.git']
+            ]
+        ])
 }
