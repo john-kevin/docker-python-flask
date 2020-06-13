@@ -17,7 +17,6 @@ pipeline{
     stages {
     	stage ('Checkout') {
     		steps{
-    			echo "Building"
                 checkout(env.GIT_BRANCH)
     		}
     	} 
@@ -83,22 +82,21 @@ def echoerrrr(message) {
 }
 
 def checkout(String branch) {
-
-    echo "${branch}" 
-    // checkout([
-    //     $class: 'GitSCM', 
-    //     branches: [
-    //         [
-    //             name: "${branch}"
-    //         ]
-    //     ], 
-    //     doGenerateSubmoduleConfigurations: false, 
-    //     extensions: [], 
-    //     submoduleCfg: [], 
-    //     userRemoteConfigs: [
-    //         [
-    //             credentialsId: 'private-repo', 
-    //             url: 'git@github.com:john-kevin/docker-python-flask.git']
-    //         ]
-    //     ])
+    echo "Checking out branch ${branch}"
+    checkout([
+        $class: 'GitSCM', 
+        branches: [
+            [
+                name: "${branch}"
+            ]
+        ], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [], 
+        submoduleCfg: [], 
+        userRemoteConfigs: [
+            [
+                credentialsId: 'private-repo', 
+                url: 'git@github.com:john-kevin/docker-python-flask.git']
+            ]
+        ])
 }
