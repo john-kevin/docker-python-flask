@@ -4,7 +4,10 @@ pipeline{
 	//    	label 'staging'
 	// }
 
-	agent any
+	agent {
+        label 'master'
+        customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}" 
+    }
 
     // triggers {
    	// 	githubPush()
