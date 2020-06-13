@@ -15,9 +15,10 @@ pipeline{
 	// }
 
     stages {
-    	stage ('Checkout') {
+    	stage ('Checkout & Build') {
     		steps{
-                checkout()
+                checkout(env.GIT_BRANCH)
+                sh 'bash ./run.sh'
     		}
     	} 
     	
@@ -81,7 +82,7 @@ def echoerrrr(message) {
 	sh "echo Hi this iss ${message}"	
 }
 
-def checkout(String branch = env.GIT_BRANCH) {
+def checkout(String branch) {
     echo "Checking out branch ${branch}"
     checkout([
         $class: 'GitSCM', 
