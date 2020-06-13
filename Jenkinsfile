@@ -82,7 +82,7 @@ def echoerrrr(message) {
 	sh "echo Hi this iss ${message}"	
 }
 
-def checkout(branch) {
+def checkout(String branch) {
 
     echo "${branch}" 
     // checkout([
