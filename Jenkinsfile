@@ -5,8 +5,10 @@ pipeline{
 	// }
 
 	agent {
-        label 'master'
-        customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}" 
+        node{
+            label 'master'
+            customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}" 
+        }
     }
 
     // triggers {
