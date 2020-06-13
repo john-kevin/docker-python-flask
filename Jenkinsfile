@@ -87,7 +87,7 @@ def checkout(branch) {
         $class: 'GitSCM', 
         branches: [
             [
-                name: ${branch}
+                name: "${branch}"
             ]
         ], 
         doGenerateSubmoduleConfigurations: false, 
