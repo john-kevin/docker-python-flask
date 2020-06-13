@@ -102,7 +102,8 @@ def checkout(String branch) {
         userRemoteConfigs: [
             [
                 credentialsId: 'private-repo', 
-                url: 'git@github.com:john-kevin/docker-python-flask.git']
+                url: env.GIT_URL
             ]
-        ])
+        ]
+    ])
 }
