@@ -81,7 +81,7 @@ def echoerrrr(message) {
 	sh "echo Hi this iss ${message}"	
 }
 
-def checkout(String branch) {
+def checkout(String branch = env.GIT_BRANCH) {
     echo "Checking out branch ${branch}"
     checkout([
         $class: 'GitSCM', 
