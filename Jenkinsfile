@@ -84,7 +84,7 @@ def echoerrrr(message) {
 
 def checkout(branch) {
 
-    echo ${branch} 
+    echo "${branch}" 
     // checkout([
     //     $class: 'GitSCM', 
     //     branches: [
