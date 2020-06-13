@@ -83,20 +83,22 @@ def echoerrrr(message) {
 }
 
 def checkout(branch) {
-    checkout([
-        $class: 'GitSCM', 
-        branches: [
-            [
-                name: "${branch}"
-            ]
-        ], 
-        doGenerateSubmoduleConfigurations: false, 
-        extensions: [], 
-        submoduleCfg: [], 
-        userRemoteConfigs: [
-            [
-                credentialsId: 'private-repo', 
-                url: 'git@github.com:john-kevin/docker-python-flask.git']
-            ]
-        ])
+
+    echo ${branch} 
+    // checkout([
+    //     $class: 'GitSCM', 
+    //     branches: [
+    //         [
+    //             name: "${branch}"
+    //         ]
+    //     ], 
+    //     doGenerateSubmoduleConfigurations: false, 
+    //     extensions: [], 
+    //     submoduleCfg: [], 
+    //     userRemoteConfigs: [
+    //         [
+    //             credentialsId: 'private-repo', 
+    //             url: 'git@github.com:john-kevin/docker-python-flask.git']
+    //         ]
+    //     ])
 }
