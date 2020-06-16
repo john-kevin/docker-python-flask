@@ -27,7 +27,8 @@ pipeline{
         }
         stage("Build") {
             steps{
-                sh 'bash ./run.sh'
+                echo "BUILD"
+                // sh 'bash ./run.sh'
             }      
         }
     	stage ('Unit test & Static Analysis') {
