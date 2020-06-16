@@ -65,6 +65,18 @@ pipeline{
     		}
     	} 
 
+    	stage ('Integration Test Testing') {
+	     	when {
+		        expression {
+		          env.BRANCH_NAME ==~ /(PR-*|develop|dit|staging).*/
+		        }
+     		}
+    		steps{
+    			echo "Integration"
+    			echo env.GIT_BRANCH
+    		}
+    	} 
+
     	stage ('Deploy') {
 	     	when {
 		        expression {
