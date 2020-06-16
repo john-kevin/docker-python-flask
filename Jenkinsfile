@@ -38,7 +38,6 @@ pipeline{
                         echo "Testing"
                         echo env.GIT_BRANCH
                     }
-
                 }
                 stage("SonarQube Analysis") {
                     steps{
@@ -65,7 +64,6 @@ pipeline{
     			echo env.GIT_BRANCH
     		}
     	} 
-
     	stage ('Deploy') {
 	     	when {
 		        expression {
