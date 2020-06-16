@@ -20,20 +20,39 @@ pipeline{
 	// }
 
     stages {
-    	stage ('Checkout & Build') {
-    		steps{
+        stage("Checkout") {
+            steps{
                 checkout(env.GIT_BRANCH)
+            }      
+        }
+        stage("Build") {
+            steps{
                 sh 'bash ./run.sh'
-    		}
-    	} 
-    	
-    	stage ('Unit Testing') {
-    		steps{
-    			echo "Testing"
-    			echo env.GIT_BRANCH
-    		}
-    	} 
+            }      
+        }
+    	stage ('Unit test & Static Analysis') {
+            parallel {
+                stage ('Unit Testing') {
+                    steps{
+                        echo "Testing"
+                        echo env.GIT_BRANCH
+                    }
 
+                }
+                stage("SonarQube Analysis") {
+                    steps{
+                        echo "Sonarqube Analysis"
+                    }      
+                   //  post{
+                   //      always{
+                   //          echo "***********Done Build"
+                   //      }
+                   // }
+                } 
+
+            }
+    		
+    	} 
     	stage ('Integration Test Testing') {
 	     	when {
 		        expression {
