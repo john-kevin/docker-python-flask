@@ -4,7 +4,12 @@ pipeline{
 	//    	label 'staging'
 	// }
 
-	agent any
+	agent {
+        node{
+            label 'master'
+            customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}"
+        }
+    }
 
     // triggers {
    	// 	githubPush()
@@ -15,19 +20,51 @@ pipeline{
 	// }
 
     stages {
-    	stage ('Checkout') {
+        stage("Checkout") {
+            steps{
+					 
+                checkout(env.GIT_BRANCH)
+            }
+        }
+        stage("Build") {
+            steps{
+                echo "BUILD"
+                // sh 'bash ./run.sh'
+            }
+        }
+    	// stage ('Unit test & Static Analysis') {
+      //       parallel {
+                stage ('Unit Testing') {
+                    steps{
+                        echo "Testing"
+                        echo env.GIT_BRANCH
+                    }
+                }
+                stage("SonarQube Analysis") {
+                    steps{
+                        echo "Sonarqube Analysis"
+                    }
+                   //  post{
+                   //      always{
+                   //          echo "***********Done Build"
+                   //      }
+                   // }
+                }
+			//
+      //       }
+			//
+    	// }
+    	stage ('Integration Testing') {
+	     	when {
+		        expression {
+		          env.BRANCH_NAME ==~ /(PR-*|develop|dit|staging|master).*/
+		        }
+     		}
     		steps{
-    			echo "Building"
-    		}
-    	} 
-    	
-    	stage ('Unit Testing') {
-    		steps{
-    			echo "Testing"
+    			echo "Integration"
     			echo env.GIT_BRANCH
     		}
-    	} 
-
+    	}
     	stage ('Deploy') {
 	     	when {
 		        expression {
@@ -56,15 +93,36 @@ pipeline{
 	  //   }
 	  // }
 	}
-    post {
-        always {
-            cleanWs()
-        }
-    }
+    // post {
+    //     always {
+    //         cleanWs()
+    //     }
+    // }
 }
 
 
-                       
-def tupan(message) {
-	sh "echo Hi this iss ${message}"	
+
+def echoerrrr(message) {
+	sh "echo Hi this iss ${message}"
+}
+
+def checkout(String branch) {
+    echo "Checking out branch ${branch}"
+    checkout([
+        $class: 'GitSCM',
+        branches: [
+            [
+                name: "${branch}"
+            ]
+        ],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [],
+        submoduleCfg: [],
+        userRemoteConfigs: [
+            [
+                credentialsId: 'private-repo',
+                url: env.GIT_URL
+            ]
+        ]
+    ])
 }
