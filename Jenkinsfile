@@ -7,7 +7,7 @@ pipeline{
 	agent {
         node{
             label 'master'
-            customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}" 
+            customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}"
         }
     }
 
@@ -22,17 +22,18 @@ pipeline{
     stages {
         stage("Checkout") {
             steps{
+		
                 checkout(env.GIT_BRANCH)
-            }      
+            }
         }
         stage("Build") {
             steps{
                 echo "BUILD"
                 // sh 'bash ./run.sh'
-            }      
+            }
         }
-    	stage ('Unit test & Static Analysis') {
-            parallel {
+    	// stage ('Unit test & Static Analysis') {
+      //       parallel {
                 stage ('Unit Testing') {
                     steps{
                         echo "Testing"
@@ -42,17 +43,17 @@ pipeline{
                 stage("SonarQube Analysis") {
                     steps{
                         echo "Sonarqube Analysis"
-                    }      
+                    }
                    //  post{
                    //      always{
                    //          echo "***********Done Build"
                    //      }
                    // }
-                } 
-
-            }
-    		
-    	} 
+                }
+			//
+      //       }
+			//
+    	// }
     	stage ('Integration Testing') {
 	     	when {
 		        expression {
@@ -63,7 +64,7 @@ pipeline{
     			echo "Integration"
     			echo env.GIT_BRANCH
     		}
-    	} 
+    	}
     	stage ('Deploy') {
 	     	when {
 		        expression {
@@ -100,26 +101,26 @@ pipeline{
 }
 
 
-                       
+
 def echoerrrr(message) {
-	sh "echo Hi this iss ${message}"	
+	sh "echo Hi this iss ${message}"
 }
 
 def checkout(String branch) {
     echo "Checking out branch ${branch}"
     checkout([
-        $class: 'GitSCM', 
+        $class: 'GitSCM',
         branches: [
             [
                 name: "${branch}"
             ]
-        ], 
-        doGenerateSubmoduleConfigurations: false, 
-        extensions: [], 
-        submoduleCfg: [], 
+        ],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [],
+        submoduleCfg: [],
         userRemoteConfigs: [
             [
-                credentialsId: 'private-repo', 
+                credentialsId: 'private-repo',
                 url: env.GIT_URL
             ]
         ]
