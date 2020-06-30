@@ -22,6 +22,7 @@ pipeline{
     stages {
         stage("Checkout") {
             steps{
+							exit 1
                 checkout(env.GIT_BRANCH)
             }
         }
