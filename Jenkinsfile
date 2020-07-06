@@ -23,6 +23,9 @@ pipeline{
         stage("Checkout") {
             steps{
                 checkout(env.GIT_BRANCH)
+								sh """
+								git diff-tree --name-only HEAD
+								"""
             }
         }
         stage("Build") {
