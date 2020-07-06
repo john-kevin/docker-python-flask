@@ -25,9 +25,7 @@ pipeline{
                 checkout(env.GIT_BRANCH)
 								sh """
 								git diff-tree --name-only HEAD
-								git --no-pager diff --name-only origin/${env.GIT_BRANCH}
-									echo ${env.CHANGE_BRANCH}
-									echo ${env.CHANGE_TARGET} 
+								git --no-pager diff --name-only origin/${env.CHANGE_BRANCH} origin/${env.CHANGE_TARGET} 
 								"""
 
             }
