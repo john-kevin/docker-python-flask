@@ -23,41 +23,35 @@ pipeline{
         stage("Checkout") {
             steps{
                 checkout(env.GIT_BRANCH)
-								sh """
-									git diff-tree --name-only HEAD
-									git --no-pager diff --name-only origin/${env.GIT_BRANCH} datastore
-								"""
-
+					sh """
+						git diff-tree --name-only HEAD
+						git --no-pager diff --name-only origin/${env.GIT_BRANCH} datastore
+					"""
             }
         }
         stage("Build") {
             steps{
                 echo "BUILD"
-                // sh 'bash ./run.sh'
+				println 'kevin'
             }
         }
-    	// stage ('Unit test & Static Analysis') {
-      //       parallel {
-                stage ('Unit Testing') {
-                    steps{
-                        echo "Testing"
-                        echo env.GIT_BRANCH
-                    }
+
+        stage ('Unit Testing') {
+            steps{
+                echo "Testing"
+                echo env.GIT_BRANCH
+            }
+        }
+        stage("SonarQube Analysis") {
+            steps{
+                echo "Sonarqube Analysis"
+            }
+            post{
+                always{
+                    echo "***********Done Build"
                 }
-                stage("SonarQube Analysis") {
-                    steps{
-                        echo "Sonarqube Analysis"
-                    }
-                   //  post{
-                   //      always{
-                   //          echo "***********Done Build"
-                   //      }
-                   // }
-                }
-			//
-      //       }
-			//
-    	// }
+           }
+        }
     	stage ('Integration Testing') {
 	     	when {
 		        expression {
