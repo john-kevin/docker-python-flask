@@ -1,3 +1,5 @@
+@Library('test-lib')
+
 pipeline{
 
 	// agent {
@@ -33,6 +35,7 @@ pipeline{
             steps{
                 echo "BUILD"
 				println 'kevin'
+				logs.info 'test from pipeline to lib'
             }
         }
 
