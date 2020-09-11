@@ -35,7 +35,9 @@ pipeline{
             steps{
                 echo "BUILD"
 				println 'kevin'
-				logs.info 'test from pipeline to lib'
+				script{
+					logs.info 'test from pipeline to lib'
+				}
             }
         }
 
