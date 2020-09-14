@@ -26,7 +26,10 @@ pipeline{
             steps{
                 // checkout(env.GIT_BRANCH)
 				script{
-					logs.checkout(env.GIT_BRANCH)	
+					logs.checkout(env.GIT_BRANCH)
+					sh """
+						ls -la
+					"""
 				}
 
 					// sh """
