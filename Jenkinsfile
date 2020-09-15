@@ -1,4 +1,4 @@
-@Library('test-lib') _
+@Library('ea-jenkins-shared-library') _
 
 def KEV = ''
 
