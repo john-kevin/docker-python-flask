@@ -44,6 +44,7 @@ pipeline{
 					logs.info 'test from pipeline to lib'
 					KEV = logs.printer('kevin')
 					echo "${KEV['red']}"
+					echo "${KEV}"
 				}
             }
         }
