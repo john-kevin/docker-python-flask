@@ -23,7 +23,7 @@ pipeline{
 				script{
 					// BUILD_DATA = logs.initialize(env.GIT_BRANCH)
 					// ENVIRONMENT = BUILD_DATA['ENVIRONMENT']
-					logs.testArray('dt','awta')
+					logs.testArray(kev:'1',thea:'2')
 				}
 
 			// sh """
