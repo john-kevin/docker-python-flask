@@ -26,7 +26,7 @@ pipeline{
 					// 	ls -la
 					// """
 					BUILD_DATA = logs.initialize(env.GIT_BRANCH)
-					echo "${BUILD_DATA}"
+					ENVIRONMENT = BUILD_DATA['ENVIRONMENT']
 
 				}
 
@@ -36,6 +36,11 @@ pipeline{
 			// """
             }
         }
+		stage("Build") {
+			steps{
+				echo "${ENVIRONMENT}"
+			}
+		}
         stage("Build") {
             steps{
                 echo "BUILD"
