@@ -23,7 +23,7 @@ pipeline{
 				script{
 					// BUILD_DATA = logs.initialize(env.GIT_BRANCH)
 					// ENVIRONMENT = BUILD_DATA['ENVIRONMENT']
-					logs.testArray('d')
+					logs.testArray('dt','awta')
 				}
 
 			// sh """
@@ -32,11 +32,11 @@ pipeline{
 			// """
             }
         }
-		stage("Testingan lang awit lods") {
-			steps{
-				echo "${ENVIRONMENT}"
-			}
-		}
+		// stage("Testingan lang awit lods") {
+		// 	steps{
+		// 		echo "${ENVIRONMENT}"
+		// 	}
+		// }
         stage("Build") {
             steps{
                 echo "BUILD"
