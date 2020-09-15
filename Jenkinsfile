@@ -1,5 +1,7 @@
 @Library('test-lib') _
 
+def KEV = ''
+
 pipeline{
 
 	// agent {
@@ -44,6 +46,8 @@ pipeline{
 				println 'kevin'
 				script{
 					logs.info 'test from pipeline to lib'
+					KEV = logs.printer('keke')
+					echo "${KEV}"
 				}
             }
         }
