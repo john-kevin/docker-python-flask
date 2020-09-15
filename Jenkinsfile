@@ -26,7 +26,7 @@ pipeline{
 					// 	ls -la
 					// """
 					BUILD_DATA = logs.initialize(env.GIT_BRANCH)
-					echo "${BUILD_DATA}"
+					// echo "${BUILD_DATA}"
 				}
 
 			// sh """
