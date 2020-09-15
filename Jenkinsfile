@@ -23,7 +23,7 @@ pipeline{
 				script{
 					BUILD_DATA = logs.initialize(env.GIT_BRANCH)
 					ENVIRONMENT = BUILD_DATA['ENVIRONMENT']
-					def data = [url: 'url', envi: ENVIRONMENT, ]
+					def data = [url: 'url', envi: ENVIRONMENT ]
 					logs.testArray(data)
 				}
 
