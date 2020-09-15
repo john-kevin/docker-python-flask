@@ -36,7 +36,7 @@ pipeline{
 			// """
             }
         }
-		stage("Build") {
+		stage("Testingan lang awit lods") {
 			steps{
 				echo "${ENVIRONMENT}"
 			}
