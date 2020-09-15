@@ -1,23 +1,16 @@
 @Library('ea-jenkins-shared-library') _
-
 def KEV = ''
 
 pipeline{
-
 	// agent {
 	//    	label 'staging'
 	// }
-
 	agent {
         node{
             label 'master'
             customWorkspace "/var/lib/jenkins/workspace/docker-python-flask/${env.BRANCH_NAME}"
         }
     }
-
-    // triggers {
-   	// 	githubPush()
-    // }
 
  //    triggers {
 	//   githubPullRequests events: [Open(), commitChanged(), commentPattern('rebuild')], spec: '', triggerMode: 'HEAVY_HOOKS'
@@ -28,16 +21,18 @@ pipeline{
             steps{
                 // checkout(env.GIT_BRANCH)
 				script{
-					logs.checkout(env.GIT_BRANCH)
-					sh """
-						ls -la
-					"""
+					// logs.checkout(env.GIT_BRANCH)
+					// sh """
+					// 	ls -la
+					// """
+					BUILD_DATA = logs.initialize(env.GIT_BRANCH)
+					echo "${BUILD_DATA}"
 				}
 
-					// sh """
-					// 	git diff-tree --name-only HEAD
-					// 	git --no-pager diff --name-only origin/${env.GIT_BRANCH} datastore
-					// """
+			// sh """
+			// 	git diff-tree --name-only HEAD
+			// 	git --no-pager diff --name-only origin/${env.GIT_BRANCH} datastore
+			// """
             }
         }
         stage("Build") {
@@ -51,13 +46,6 @@ pipeline{
 				}
             }
         }
-
-        stage ('Unit Testing') {
-            steps{
-                echo "Testing"
-                echo env.GIT_BRANCH
-            }
-        }
         stage("SonarQube Analysis") {
             steps{
                 echo "Sonarqube Analysis"
@@ -68,17 +56,6 @@ pipeline{
                 }
            }
         }
-    	stage ('Integration Testing') {
-	     	when {
-		        expression {
-		          env.BRANCH_NAME ==~ /(PR-*|develop|dit|staging|master).*/
-		        }
-     		}
-    		steps{
-    			echo "Integration"
-    			echo env.GIT_BRANCH
-    		}
-    	}
     	stage ('Deploy') {
 	     	when {
 		        expression {
@@ -112,31 +89,4 @@ pipeline{
     //         cleanWs()
     //     }
     // }
-}
-
-
-
-def echoerrrr(message) {
-	sh "echo Hi this iss ${message}"
-}
-
-def checkout(String branch) {
-    echo "Checking out branch ${branch}"
-    checkout([
-        $class: 'GitSCM',
-        branches: [
-            [
-                name: "${branch}"
-            ]
-        ],
-        doGenerateSubmoduleConfigurations: false,
-        extensions: [],
-        submoduleCfg: [],
-        userRemoteConfigs: [
-            [
-                credentialsId: 'private-repo',
-                url: env.GIT_URL
-            ]
-        ]
-    ])
 }
