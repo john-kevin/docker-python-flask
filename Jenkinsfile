@@ -21,13 +21,9 @@ pipeline{
             steps{
                 // checkout(env.GIT_BRANCH)
 				script{
-					// logs.checkout(env.GIT_BRANCH)
-					// sh """
-					// 	ls -la
-					// """
-					BUILD_DATA = logs.initialize(env.GIT_BRANCH)
-					ENVIRONMENT = BUILD_DATA['ENVIRONMENT']
-
+					// BUILD_DATA = logs.initialize(env.GIT_BRANCH)
+					// ENVIRONMENT = BUILD_DATA['ENVIRONMENT']
+					logs.testArray(['kevin','thea'])
 				}
 
 			// sh """
