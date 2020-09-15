@@ -46,7 +46,7 @@ pipeline{
 				println 'kevin'
 				script{
 					logs.info 'test from pipeline to lib'
-					KEV = logs.printer('keke')
+					KEV = logs.printer('kevin')
 					echo "${KEV['red']}"
 				}
             }
